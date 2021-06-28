@@ -12,7 +12,7 @@
        //   KE - Return to employee selection
        //   KF - Return to project selection
        //   KG - Return to reason code selection!
-       //   LR - Last record!!!!
+       //   LR - Last record!!!!!!!!
        // ***********************************************************
        //   SUBROUTINES USED
        //   EDITSL - Edit application selection display (SELECT)

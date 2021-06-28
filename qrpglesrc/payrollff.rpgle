@@ -11,8 +11,8 @@
        //   KD - Return to application selection
        //   KE - Return to employee selection
        //   KF - Return to project selection
-       //   KG - Return to reason code selection
-       //   LR - Last record
+       //   KG - Return to reason code selection!
+       //   LR - Last record!!!!
        // ***********************************************************
        //   SUBROUTINES USED
        //   EDITSL - Edit application selection display (SELECT)

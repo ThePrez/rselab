@@ -1,0 +1,36 @@
+             PGM        PARM(&LIBRARY &FILE &MEMBER &MTYPE &CTYPE )
+
+VARS:        DCL        VAR(&LIBRARY) TYPE(*CHAR) LEN(10) /* library */
+             DCL        VAR(&FILE) TYPE(*CHAR) LEN(10) /* file name */
+             DCL        VAR(&MEMBER) TYPE(*CHAR) LEN(10) /* member name */
+             DCL        VAR(&MTYPE) TYPE(*CHAR) LEN(10) /* member type */
+             DCL        VAR(&CTYPE) TYPE(*CHAR) LEN(10) /* compile type */
+
+
+START:       /* declare message monitors */
+
+             /* Setup the RPG Compiles */
+RPG:         IF         COND(&MTYPE = 'RPGLE     ') THEN(DO)
+                IF         COND(&CTYPE = '*DEV ') THEN(CRTBNDRPG +
+                             PGM(&LIBRARY/&MEMBER) SRCFILE(&LIBRARY/&FILE) +
+                             SRCMBR(&MEMBER) DBGVIEW(*ALL) +
+                             OPTIMIZE(*NONE) REPLACE(*YES))
+                ELSE       CMD(CRTBNDRPG PGM(&LIBRARY/&MEMBER) +
+                             SRCFILE(&LIBRARY/&FILE) SRCMBR(&MEMBER) +
+                             DBGVIEW(*NONE) OPTIMIZE(*FULL) +
+                             REPLACE(*YES))
+                ENDDO
+
+             /* Setup the COBOL Compiles */
+CBL:         ELSE       CMD(IF COND(&MTYPE = 'CBLLE     ') THEN(DO))
+                IF         COND(&CTYPE = '*DEV ') THEN(CRTBNDCBL +
+                             PGM(&LIBRARY/&MEMBER) SRCFILE(&LIBRARY/&FILE) +
+                             SRCMBR(&MEMBER) DBGVIEW(*ALL) +
+                             OPTIMIZE(*NONE) REPLACE(*YES))
+                ELSE       CMD(CRTBNDCBL PGM(&LIBRARY/&MEMBER) +
+                             SRCFILE(&LIBRARY/&FILE) SRCMBR(&MEMBER) +
+                             DBGVIEW(*NONE) OPTIMIZE(*FULL) +
+                             REPLACE(*YES))
+                ENDDO
+
+END:         ENDPGM
